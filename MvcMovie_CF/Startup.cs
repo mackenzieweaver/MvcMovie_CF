@@ -27,8 +27,6 @@ namespace MvcMovie_CF
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-            services.AddDbContext<MvcMovieContext>(options => options.UseSqlServer(Configuration.GetConnectionString("MvcMovieContext")));
-
             services.AddDbContext<MvcMovie_CFContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("MvcMovie_CFContext")));
         }
