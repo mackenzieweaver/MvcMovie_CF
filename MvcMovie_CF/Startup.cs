@@ -8,6 +8,9 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using MvcMovie_CF.Data;
+using Microsoft.EntityFrameworkCore;
+
 
 namespace MvcMovie_CF
 {
@@ -24,6 +27,10 @@ namespace MvcMovie_CF
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddDbContext<MvcMovieContext>(options => options.UseSqlServer(Configuration.GetConnectionString("MvcMovieContext")));
+
+            services.AddDbContext<MvcMovie_CFContext>(options =>
+                    options.UseSqlServer(Configuration.GetConnectionString("MvcMovie_CFContext")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
