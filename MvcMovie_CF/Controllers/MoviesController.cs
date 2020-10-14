@@ -20,9 +20,15 @@ namespace MvcMovie_CF.Controllers
         }
 
         // GET: Movies
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchstring)
         {
-            return View(await _context.Movie.ToListAsync());
+            var movies = from m in _context.Movie
+                         select m;
+            if (!String.IsNullOrEmpty(searchstring))
+            {
+                movies = movies.Where(s => s.Title.Contains(searchstring));
+            }
+            return View(await movies.ToListAsync());
         }
 
         // GET: Movies/Details/5
